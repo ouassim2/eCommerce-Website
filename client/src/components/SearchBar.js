@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import styled from "styled-components";
-// import { toast } from "react-toastify"
-// import "react-toastify/dist/ReactToastify.css";
+import { toast } from "react-toastify"
+import "react-toastify/dist/ReactToastify.css";
 
 // search through product inventory. state/props passed from app
 const SearchBar = ({ noneFilteredItems, setFilteredItems }) => {
@@ -23,7 +23,7 @@ const SearchBar = ({ noneFilteredItems, setFilteredItems }) => {
         navigate(`/searchProducts`)
         setValue("")
       }else{
-        // toast.warn("No result found !")
+        toast.warn("No result found !")
         
       }
     }
@@ -35,7 +35,7 @@ const SearchBar = ({ noneFilteredItems, setFilteredItems }) => {
       navigate(`/searchProducts`)
       setValue("")
     }else{
-      // toast.dark("No result found !")
+      toast.warn("No result found !")
     }
   };
 

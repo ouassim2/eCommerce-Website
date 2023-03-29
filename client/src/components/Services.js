@@ -93,7 +93,6 @@ const BodyWrapper = styled.div`
   height: 100vh;
   display: flex;
   justify-content: center;
-  background-color: #f0ead6;
 `;
 
 const Wrapper = styled.div`

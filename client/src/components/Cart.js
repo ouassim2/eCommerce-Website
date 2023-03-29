@@ -121,7 +121,6 @@ const Cart = ({ noneFilteredItems }) => {
 export default Cart;
 
 const BodyWrapper = styled.div`
-  background-color: #f0ead6;
 `;
 
 const Wrapper = styled.div`
