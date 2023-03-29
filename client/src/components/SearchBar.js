@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import styled from "styled-components";
+// import { toast } from "react-toastify"
+// import "react-toastify/dist/ReactToastify.css";
 
 // search through product inventory. state/props passed from app
 const SearchBar = ({ noneFilteredItems, setFilteredItems }) => {
@@ -15,16 +17,26 @@ const SearchBar = ({ noneFilteredItems, setFilteredItems }) => {
   const handleSelect = (e) => {
     if (e.key === "Enter" ) {
       e.preventDefault()
-      setFilteredItems(ResultArray)
-      navigate(`/searchProducts`)
-      setValue("")
+
+      if (ResultArray.length >= 1){
+        setFilteredItems(ResultArray)
+        navigate(`/searchProducts`)
+        setValue("")
+      }else{
+        // toast.warn("No result found !")
+        
+      }
     }
   }
 
   const handleClick = () => {
-    setFilteredItems(ResultArray)
-    navigate(`/searchProducts`)
-    setValue("")
+    if (ResultArray.length >= 1){
+      setFilteredItems(ResultArray)
+      navigate(`/searchProducts`)
+      setValue("")
+    }else{
+      // toast.dark("No result found !")
+    }
   };
 
   const handlesubmit = (e) => { // prevent the default behavior of the page reload for the form onSubmit event handler

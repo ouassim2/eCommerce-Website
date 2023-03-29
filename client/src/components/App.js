@@ -11,6 +11,8 @@ import Contact from "./Contact";
 import Services from "./Services";
 import SearchProducts from "./SearchProducts"
 import styled from "styled-components";
+// import { ToastContainer } from "react-toastify";
+
 
 // filter products by category to use for the dropdown filter
 const filterProductsByCategory = (products, category) => {
@@ -63,6 +65,7 @@ function App() {
     <Wrapper>
       <Router>
         <GlobalStyles />
+        {/* <ToastContainer />   */}
         <Navbar noneFilteredItems={noneFilteredItems} setFilteredItems={setFilteredItems}/>
         
         <Routes>
