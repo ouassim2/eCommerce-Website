@@ -9,8 +9,8 @@ const Cart = ({ noneFilteredItems }) => {
   const [isPurchased, setIsPurchased] = useState(false);
 
   // const { userId, setCartItems, cartItems, calculateCartTotal, cartTotal, dispatch } = useContext(CartContext);
-  const { userId, setCartItems, cartItems, cartTotal, dispatch } =
-    useContext(CartContext);
+  const { userId, setCartItems, cartItems, cartTotal, dispatch } = useContext(CartContext);
+
 
   // Function that clears all the items from the orders collection when the cart is purchased.
   const clearCart = () => {
@@ -41,9 +41,28 @@ const Cart = ({ noneFilteredItems }) => {
       .catch((err) => console.log(err));
   }, [setCartItems, dispatch]);
 
-  const handlePurchase = () => {
+
+
+  const handlePurchase = async () => {
     setIsPurchased(true);
-  };
+    
+    // TODO maybee display something to the customer when purchase succed 
+    // e.preventDefault()
+    const stripePurchase = await fetch("/purchase-items",
+      {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ total : cartTotal })
+      
+      })
+      console.log("TCL: stripePurchase", stripePurchase)
+      //TODO maybee if res.status 200 setIsPurchased(true);
+
+    
+    }
 
   const handleCloseConfirmation = () => {
     window.location.reload();

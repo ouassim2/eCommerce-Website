@@ -268,11 +268,18 @@ const emptyCart = async(req, res) =>{
     console.log("disconnected!")
 }
 
+//TODO handler for stripe (cart total working)
+const purchaseItems = async (req, res) => {
+    const cartTotal = req.body.total 
+    console.log("TCL: cartTotal", cartTotal)
+
+};
 
 module.exports = {
     getOrders, 
     updateOrder,
     createOrder, 
     deleteOrder,
-    emptyCart
+    emptyCart,
+    purchaseItems
 };

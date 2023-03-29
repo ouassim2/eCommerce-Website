@@ -4,7 +4,7 @@ const express = require('express');
 const morgan = require('morgan');
 const { getAllItems, getSingleItem, updateItem} = require("./itemsHandlers")
 const { getCompanies, getCompany, updateCompany} = require("./companyHandlers")
-const { getOrders, getOrder, updateOrder, createOrder, deleteOrder, emptyCart} = require("./orderHandlers")
+const { getOrders, getOrder, updateOrder, createOrder, deleteOrder, emptyCart, purchaseItems} = require("./orderHandlers")
 
 const PORT = 8000;
 
@@ -38,6 +38,7 @@ express()
 
   .get('/orders', getOrders)
   .post('/order', createOrder)
+  .post('/purchase-items', purchaseItems)
   .patch('/order/:productId', updateOrder)
   .delete('/order', deleteOrder)
 
