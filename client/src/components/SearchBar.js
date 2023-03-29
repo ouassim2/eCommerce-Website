@@ -1,22 +1,35 @@
 import { useState } from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
 // search through product inventory. state/props passed from app
-const SearchBar = ({ noneFilteredItems }) => {
-  console.log("  ~ noneFilteredItems", noneFilteredItems)
+const SearchBar = ({ noneFilteredItems, setFilteredItems }) => {
+  // console.log("  ~ noneFilteredItems", noneFilteredItems)
   const [value, setValue] = useState(""); // to store the search querry
+  const navigate = useNavigate();
 
-  const handleSelect = () => {
-    window.alert("should bring to a new matching search querry page?"); // if a user type fitbit hit enter should go to a new page with all the fitbit
+  let ResultArray = []
+  let slicedResultArray = []
+  
+  
+  const handleSelect = (e) => {
+    if (e.key === "Enter" ) {
+      e.preventDefault()
+      setFilteredItems(ResultArray)
+      navigate(`/searchProducts`)
+      setValue("")
+    }
+  }
+
+  const handleClick = () => {
+    setFilteredItems(ResultArray)
+    navigate(`/searchProducts`)
+    setValue("")
   };
 
   const handlesubmit = (e) => { // prevent the default behavior of the page reload for the form onSubmit event handler
     e.preventDefault()
-  };
-
-  let ResultArray = []
-  let slicedResultArray = []
+  }
 
   if (noneFilteredItems && value.length >= 1) { // we make sure the filtering starts only after 2 inputs have registered and we wait for our prop to load(the fetch)
 
@@ -27,7 +40,7 @@ const SearchBar = ({ noneFilteredItems }) => {
       let result = upperCaseWatchName.includes(upperCaseUserInput) // if the user input = name result will be true
 
       if (result && numInStock >= 1) { // we check if result is true AND item not out of stock 
-        ResultArray.push({ _id, name, price, imageSrc }) // we push the filtered new object to our array 
+        ResultArray.push({ _id, name, price, imageSrc, numInStock }) // we push the filtered new object to our array 
 
         slicedResultArray = ResultArray.slice(0, 5) // we finally make sure to get a shallow copy with only 5 noneFilteredItems 
 
@@ -48,21 +61,14 @@ const SearchBar = ({ noneFilteredItems }) => {
           <>
             <Input
               value={value}
-              onChange={(event) => {
-                setValue(event.target.value);
+              onChange={(e) => {
+                setValue(e.target.value);
               }}
-              onKeyDown={(event) => {
-                if (event.key === "Enter") {
-                  handleSelect(event.target.value);
-                }
-              }}
+              onKeyDown={handleSelect}
               placeholder="Search"
             ></Input>
 
-            <Ok onClick={(event) => handleSelect(event.target.value)}>
-              Search
-            </Ok>
-
+            <Ok onClick={handleClick}> Search </Ok>
             <StyledUl>
               {slicedResultArray.map(({ name, price, _id, imageSrc }) => {
 

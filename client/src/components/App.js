@@ -8,14 +8,12 @@ import Footer from "./Footer";
 import Cart from "./Cart";
 import About from "./About";
 import Contact from "./Contact";
-
 import Services from "./Services";
+import SearchProducts from "./SearchProducts"
 
 // filter products by category to use for the dropdown filter
 const filterProductsByCategory = (products, category) => {
-  return products.filter((item) => {
-    return item.category === category;
-  });
+  return products.filter((item) => item.category === category);
 };
 // app for page navigation and to share props to other components
 function App() {
@@ -27,6 +25,8 @@ function App() {
   const [items, setItems] = useState();
   // return filtered state back to none
   const [noneFilteredItems, setnoneFilteredItems] = useState([]);
+  // the list of the full filtered search items 
+  const [filteredItems, setFilteredItems] = useState([])
   
   // The initial fetch of the products on app load
   useEffect(() => {
@@ -62,15 +62,17 @@ function App() {
     <>
       <Router>
         <GlobalStyles />
-        <Navbar noneFilteredItems={noneFilteredItems} />
+        <Navbar noneFilteredItems={noneFilteredItems} setFilteredItems={setFilteredItems}/>
         
         <Routes>
           <Route path="/" element={<Homepage items={items} setFilterCategory={setFilterCategory} categories={categories} />} />
-          <Route path="About" element={<About />} />
+          <Route path="/About" element={<About />} />
           <Route path="/product/:id" element={<ProductDetails />} />
           <Route path="/Services" element={<Services/> } />
           <Route path="/Contact" element={<Contact/> } />
           <Route path="/cart/:userId" element={<Cart noneFilteredItems={noneFilteredItems}/>} />
+          <Route path="/searchProducts" element={<SearchProducts filteredItems={filteredItems}/> } />
+        
         </Routes>
         <Footer />
       </Router>

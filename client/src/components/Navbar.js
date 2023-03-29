@@ -7,7 +7,7 @@ import { AiOutlineShopping } from "react-icons/ai";
 import logo from "../assets/rolexLogo.png";
 
 // navbar displays pagelinks, searchbar and logo, it recieves state/props from the app
-const Navbar = ({ noneFilteredItems }) => {
+const Navbar = ({ noneFilteredItems, setFilteredItems }) => {
   const { userId } = useContext(CartContext);
 
   return (
@@ -38,7 +38,7 @@ const Navbar = ({ noneFilteredItems }) => {
           </LeftColumn>
 
           <RightColumn>
-            <SearchBar noneFilteredItems={noneFilteredItems} />
+            <SearchBar setFilteredItems={setFilteredItems} noneFilteredItems={noneFilteredItems} />
             <LinkItem to={`/cart/${userId}`}>
               {" "}
               <AiOutlineShopping size="35" margin-right="20px" />{" "}
