@@ -10,6 +10,7 @@ import About from "./About";
 import Contact from "./Contact";
 import Services from "./Services";
 import SearchProducts from "./SearchProducts"
+import styled from "styled-components";
 
 // filter products by category to use for the dropdown filter
 const filterProductsByCategory = (products, category) => {
@@ -59,7 +60,7 @@ function App() {
   }, [filterCategory]);
 
   return (
-    <>
+    <Wrapper>
       <Router>
         <GlobalStyles />
         <Navbar noneFilteredItems={noneFilteredItems} setFilteredItems={setFilteredItems}/>
@@ -76,8 +77,10 @@ function App() {
         </Routes>
         <Footer />
       </Router>
-    </>
+    </Wrapper>
   );
 }
 
+const Wrapper = styled.div`
+`
 export default App;

@@ -23,6 +23,7 @@ const SearchProducts = ({ filteredItems}) => {
 };
 
 const Wrapper = styled.div`
+
 `
 
 const ProductGrid = styled.div`

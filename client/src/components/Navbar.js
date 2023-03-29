@@ -12,8 +12,7 @@ const Navbar = ({ noneFilteredItems, setFilteredItems }) => {
 
   return (
     <Wrapper>
-      <nav>
-        <ul>
+        <nav>
           <LeftColumn>
             <LinkItem to="/">
               {" "}
@@ -44,8 +43,7 @@ const Navbar = ({ noneFilteredItems, setFilteredItems }) => {
               <AiOutlineShopping size="35" margin-right="20px" />{" "}
             </LinkItem>
           </RightColumn>
-        </ul>
-      </nav>
+        </nav>
     </Wrapper>
   );
 };
@@ -53,15 +51,16 @@ const Navbar = ({ noneFilteredItems, setFilteredItems }) => {
 const Wrapper = styled.div`
   background-color: #023f05;
   height: 50px;
+  width: 100%;
+  z-index: 10;
+  position: sticky;
+  top: 0;
 
-  nav {
-    ul {
+    nav {
       display: flex;
-      /* align-items: center; */
       justify-content: space-between;
       list-style: none;
     }
-  }
 `;
 
 const LinkItem = styled(NavLink)`

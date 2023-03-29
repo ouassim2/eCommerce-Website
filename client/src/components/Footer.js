@@ -17,13 +17,14 @@ const Footer = () => {
 };
 
 const Wrapper = styled.div`
-margin:0;
+  margin:0;
   background-color: #023f05;
   display: flex;
   align-items: center;
   justify-content: space-between;
   list-style: none;
   height: 50px;
+
   li{
     color: white;
     margin-left: 40px;
