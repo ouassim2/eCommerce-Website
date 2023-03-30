@@ -291,13 +291,13 @@ const purchaseItems = async (req, res) => {
                     
                 }     
             }),
-            
+            // prolly need to add /client before Transaction...
             mode: 'payment',
             success_url: 'http://localhost:3000/TransactionSuccess',
             cancel_url: 'http://localhost:3000/TransactionCancel',
         });
 
-        res.status(200).json({ status: 200, url: session })
+        res.status(200).json({ status: 200, url: session.url })
         
 
     } catch (error) {

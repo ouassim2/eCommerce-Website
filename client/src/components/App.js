@@ -78,7 +78,6 @@ function App() {
           <Route path="/cart/:userId" element={<Cart noneFilteredItems={noneFilteredItems}/>} />
           <Route path="/searchProducts" element={<SearchProducts filteredItems={filteredItems}/> } />
         
-         {/*NONEED maybee we dont even need this cuz stripe redirect streight to component (like navigate) */}
           <Route path="/TransactionSuccess" element={<TransactionSuccess /> } />
           <Route path="/TransactionCancel" element={<TransactionCancel /> } />
 

@@ -61,7 +61,11 @@ const Cart = ({ noneFilteredItems }) => {
       })
       //TODO maybee if res.status 200 setIsPurchased(true);
       const redirectToStripe = await stripePurchase.json()
-      console.log("~~~TCL: redirectToStripe", redirectToStripe)
+      
+      if(redirectToStripe.status === 200){
+
+        window.location.assign(redirectToStripe.url)
+      }
       
     } catch (error) {
       console.log(error)
