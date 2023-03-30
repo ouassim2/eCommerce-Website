@@ -3,7 +3,7 @@ require("dotenv").config();
 const { MongoClient} = require("mongodb");
 const { v4: uuidv4 } = require("uuid");
 
-const stripe = require('stripe')('sk_test_Hrs6SAopgFPF0bZXSN3f6ELN')
+const stripe = require('stripe')(process.env.STRIPE_TEST_URI)
 
 const {MONGO_URI_TORONTO} = process.env;
 
@@ -276,21 +276,25 @@ const purchaseItems = async (req, res) => {
     try {
         
         const session = await stripe.checkout.sessions.create({
-            line_items: [
-                    {
-                        price_data: {
-                            currency: 'cad',
-                            product_data: {
-                                name: itemsArray[0].name,
+            line_items: itemsArray.map(({name, price, qty }) =>{
+
+                return {
+                    
+                    price_data: {
+                        currency: 'cad',
+                        product_data: {
+                            name,
+                        },
+                        unit_amount: +price.slice(1)*100,
                     },
-                    unit_amount: +itemsArray[0].price.slice(1)*100,
-                    },
-                    quantity: itemsArray[0].qty,
-                },
-            ],
+                    quantity: qty,
+                    
+                }     
+            }),
+            
             mode: 'payment',
             success_url: 'http://localhost:3000/TransactionSuccess',
-            cancel_url: 'http://localhost:3000/Transactioncancel',
+            cancel_url: 'http://localhost:3000/TransactionCancel',
         });
 
         res.status(200).json({ status: 200, url: session })

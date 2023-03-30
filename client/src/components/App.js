@@ -13,6 +13,7 @@ import SearchProducts from "./SearchProducts"
 import styled from "styled-components";
 import { ToastContainer } from "react-toastify";
 import TransactionSuccess from "./TransactionSuccess"
+import TransactionCancel from "./TransactionCancel"
 
 // filter products by category to use for the dropdown filter
 const filterProductsByCategory = (products, category) => {
@@ -76,7 +77,10 @@ function App() {
           <Route path="/Contact" element={<Contact/> } />
           <Route path="/cart/:userId" element={<Cart noneFilteredItems={noneFilteredItems}/>} />
           <Route path="/searchProducts" element={<SearchProducts filteredItems={filteredItems}/> } />
+        
+         {/*NONEED maybee we dont even need this cuz stripe redirect streight to component (like navigate) */}
           <Route path="/TransactionSuccess" element={<TransactionSuccess /> } />
+          <Route path="/TransactionCancel" element={<TransactionCancel /> } />
 
         </Routes>
         <Footer />
