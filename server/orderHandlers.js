@@ -1,15 +1,16 @@
 "use strict";
-const { MongoClient} = require("mongodb");
 require("dotenv").config();
+const { MongoClient} = require("mongodb");
+const { v4: uuidv4 } = require("uuid");
+
+const stripe = require('stripe')('sk_test_Hrs6SAopgFPF0bZXSN3f6ELN')
+
 const {MONGO_URI_TORONTO} = process.env;
 
 const options = {
     useNewUrlparser: true,
     useUnifiedTopology:true,
 }
-// use this package to generate unique ids: 
-const { v4: uuidv4 } = require("uuid");
-
 
 // returns all orders
 const getOrders = async(req, res) => {
@@ -270,9 +271,35 @@ const emptyCart = async(req, res) =>{
 
 //TODO handler for stripe (cart total working)
 const purchaseItems = async (req, res) => {
-    const cartTotal = req.body.total 
-    console.log("TCL: cartTotal", cartTotal)
+    const itemsArray = req.body
+    
+    try {
+        
+        const session = await stripe.checkout.sessions.create({
+            line_items: [
+                    {
+                        price_data: {
+                            currency: 'cad',
+                            product_data: {
+                                name: itemsArray[0].name,
+                    },
+                    unit_amount: +itemsArray[0].price.slice(1)*100,
+                    },
+                    quantity: itemsArray[0].qty,
+                },
+            ],
+            mode: 'payment',
+            success_url: 'http://localhost:3000/TransactionSuccess',
+            cancel_url: 'http://localhost:3000/Transactioncancel',
+        });
 
+        res.status(200).json({ status: 200, url: session })
+        
+
+    } catch (error) {
+    console.log("~~~TCL: error", error)
+        
+    }   
 };
 
 module.exports = {

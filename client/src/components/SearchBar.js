@@ -80,7 +80,7 @@ const SearchBar = ({ noneFilteredItems, setFilteredItems }) => {
               placeholder="Search"
             ></Input>
 
-            <Ok onClick={handleClick}> Search </Ok>
+            <Ok onClick={handleClick} > Search </Ok>
             <StyledUl>
               {slicedResultArray.map(({ name, price, _id, imageSrc }) => {
 
@@ -152,7 +152,7 @@ const StyledUl = styled.ul`
   margin-top: 10px;
   width: 400px;
   height: 0; // check
-  padding: 0px 20px;
+  /* padding: 0px 20px; */
   -webkit-box-shadow: 5px 5px 15px 5px #000000;
   box-shadow: 5px 5px 15px 5px #000000;
 
@@ -165,9 +165,6 @@ const StyledUl = styled.ul`
     }
   }
 
-  span {
-    /* font-weight: bold; */
-  } 
 `;
 
 const StyledLi = styled.li`
@@ -175,12 +172,14 @@ const StyledLi = styled.li`
   color: white;
   padding: 10px 30px;
   border-radius: 5px;
-
   cursor: pointer;
   background-color: #d0b180;
   /* border-radius: 15px; */
   z-index: 2;
 
+  span{
+    font-weight: bold;
+  }
   :hover{
   background-color: #d8be97;
   }
@@ -202,5 +201,6 @@ const Ok = styled.button`
 
 const LinkItem = styled(NavLink)`
 text-decoration: none;
+/* margin-right: 30px; */
 `
 export default SearchBar;

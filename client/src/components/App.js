@@ -12,7 +12,7 @@ import Services from "./Services";
 import SearchProducts from "./SearchProducts"
 import styled from "styled-components";
 import { ToastContainer } from "react-toastify";
-
+import TransactionSuccess from "./TransactionSuccess"
 
 // filter products by category to use for the dropdown filter
 const filterProductsByCategory = (products, category) => {
@@ -76,7 +76,8 @@ function App() {
           <Route path="/Contact" element={<Contact/> } />
           <Route path="/cart/:userId" element={<Cart noneFilteredItems={noneFilteredItems}/>} />
           <Route path="/searchProducts" element={<SearchProducts filteredItems={filteredItems}/> } />
-        
+          <Route path="/TransactionSuccess" element={<TransactionSuccess /> } />
+
         </Routes>
         <Footer />
       </Router>

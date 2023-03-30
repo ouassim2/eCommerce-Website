@@ -44,25 +44,31 @@ const Cart = ({ noneFilteredItems }) => {
 
 
   const handlePurchase = async () => {
-    setIsPurchased(true);
+    // setIsPurchased(true);
     
     // TODO maybee display something to the customer when purchase succed 
     // e.preventDefault()
-    const stripePurchase = await fetch("/purchase-items",
+    try {
+
+      const stripePurchase = await fetch("/purchase-items",
       {
         method: "POST",
         headers: {
           Accept: "application/json",
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ total : cartTotal })
-      
+        body: JSON.stringify(cartItems)
       })
-      console.log("TCL: stripePurchase", stripePurchase)
       //TODO maybee if res.status 200 setIsPurchased(true);
-
-    
+      const redirectToStripe = await stripePurchase.json()
+      console.log("~~~TCL: redirectToStripe", redirectToStripe)
+      
+    } catch (error) {
+      console.log(error)
+      
     }
+    
+  }
 
   const handleCloseConfirmation = () => {
     window.location.reload();
@@ -92,7 +98,7 @@ const Cart = ({ noneFilteredItems }) => {
             {cartItems.length > 0 && (
               <PurchaseButton
                 onClick={() => {
-                  clearCart();
+                  // clearCart(); 
                   handlePurchase();
                 }}
               >
