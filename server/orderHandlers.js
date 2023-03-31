@@ -291,7 +291,7 @@ const purchaseItems = async (req, res) => {
                     
                 }     
             }),
-            // prolly need to add /client before Transaction...
+            
             mode: 'payment',
             success_url: 'http://localhost:3000/TransactionSuccess',
             cancel_url: 'http://localhost:3000/TransactionCancel',
